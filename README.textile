@@ -1,1 +1,26 @@
 Aims to be the smallest, easiest to use ruby Atom feed generator.
+
+Example usage:
+
+<pre>
+<code>
+feed = TinyAtom::Feed.new('http://mysite.com/', 'My Site',
+  'http://mysite.com/atom.xml')
+feed.add_entry(1, 'entry 1', Time.now, 'http://mysite.com/1')
+feed.make(:target => STDOUT, :indent => 2)
+
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>My Site</title>
+  <link href="http://mysite.com/atom.xml" rel="self"/>
+  <updated>2010-05-18T00:19:13-04:00</updated>
+  <id>http://mysite.com/</id>
+  <entry>
+    <title>entry 1</title>
+    <link href="http://mysite.com/1"/>
+    <id>tag:mysite.com,2010-05-18:1</id>
+    <updated>Tue May 18 00:19:13 -0400 2010</updated>
+  </entry>
+</feed>
+</code>
+</pre>
