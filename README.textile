@@ -7,7 +7,7 @@ Example usage:
 feed = TinyAtom::Feed.new('http://mysite.com/', 'My Site',
   'http://mysite.com/atom.xml')
 feed.add_entry(1, 'entry 1', Time.now, 'http://mysite.com/1')
-feed.make(:target => STDOUT, :indent => 2)
+puts feed.make(:indent => 2)
 
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
