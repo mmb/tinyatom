@@ -44,7 +44,7 @@ module TinyAtom
             xm.title(e[:title])
             xm.link(:href => e[:link])
             xm.id(entry_id(e))
-            xm.updated(e[:updated])
+            xm.updated(e[:updated].xmlschema)
             xm.summary(e[:summary]) if e[:summary]
             xm.content(e[:content]) if e[:content]
 
