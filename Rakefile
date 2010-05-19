@@ -10,6 +10,7 @@ begin
     %w{
       builder 2.1.2
      }.each_slice(2) { |g,v| gemspec.add_dependency(g, ">= #{v}") }
+    Jeweler::GemcutterTasks.new
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: gem install jeweler"
