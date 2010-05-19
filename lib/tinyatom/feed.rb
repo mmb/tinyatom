@@ -1,17 +1,6 @@
 require 'uri'
 require 'builder'
 
-class URI::Generic
-
-  # Add domain method to URI
-  def domain
-    if (host and (d = host[/[a-z\d-]+\.[a-z]{2,}(\.[a-z]{2})?$/]))
-      d.downcase
-    end
-  end
-
-end
-
 module TinyAtom
 
   class Feed
@@ -26,7 +15,7 @@ module TinyAtom
       @entries = []
     end
 
-    # Add an entry to the feed.
+    # Add an entry to the feed
     def add_entry(id, title, updated, link, options={})
       entries << {
         :id => id,
@@ -36,6 +25,7 @@ module TinyAtom
         }.merge(options)
     end
 
+    # Build the feed and return a Builder::XmlMarkup
     def make(options={})
       xm = Builder::XmlMarkup.new(options)
       xm.instruct!(:xml)
@@ -63,10 +53,10 @@ module TinyAtom
       }
     end
 
-    # Return the last update time of the feed,
+    # Return the last update time of the feed
     def updated; entries.map { |e| e[:updated] }.max; end
 
-    # Build an entry id.
+    # Build an entry id
     def entry_id(e)
       # http://diveintomark.org/archives/2004/05/28/howto-atom-id
       "tag:#{site_domain},#{e[:updated].strftime('%Y-%m-%d')}:#{e[:id]}"
@@ -82,7 +72,7 @@ module TinyAtom
 
   module_function
 
-  # Add author tags if present.
+  # Add author tags if present
   def author(markup, h)
     if h[:author_name] or h[:author_email] or h[:author_uri]
       markup.author {
@@ -93,7 +83,7 @@ module TinyAtom
     end
   end
 
-  # Add enclosure tags if present.
+  # Add enclosure tags if present
   def enclosure(markup, h)
     if h[:enclosure_type] and h[:link] and h[:enclosure_title]
       xm.link(:rel => 'enclosure', :type => h[:enclosure_type],
@@ -101,7 +91,7 @@ module TinyAtom
     end
   end
 
-  # Add via tags if present.
+  # Add via tags if present
   def via(markup, h)
     if h[:via_type] and h[:via_url] and h[:via_title]
       markup.link(:rel => 'via', :type => h[:via_type],
