@@ -79,7 +79,7 @@ module TinyAtom
   def author(markup, h)
     if h[:author_name]
       markup.author {
-        markup.name(h[:author_name]) if h[:author_name]
+        markup.name(h[:author_name])
         markup.email(h[:author_email]) if h[:author_email]
         markup.uri(h[:author_uri]) if h[:author_uri]
       }
