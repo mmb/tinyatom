@@ -21,9 +21,10 @@ Gem::Specification.new do |s|
      "README.textile",
      "Rakefile",
      "VERSION",
+     "lib/tinyatom.rb",
      "lib/tinyatom/feed.rb",
-     "lib/tinyatom/tinyatom.rb",
-     "lib/tinyatom/uri.rb"
+     "lib/tinyatom/uri.rb",
+     "tinyatom.gemspec"
   ]
   s.homepage = %q{http://github.com/mmb/tinyatom}
   s.rdoc_options = ["--charset=UTF-8"]
