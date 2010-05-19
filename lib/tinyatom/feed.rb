@@ -6,11 +6,10 @@ module TinyAtom
   class Feed
 
     def initialize(site_url, title, feed_url, options={})
-      @site_url, @title, @feed_url = site_url, title, feed_url
+      @site_url, @title, @feed_url, @feed_options = site_url, title, feed_url,
+        options
 
       @site_domain = URI(@site_url).domain
-
-      @hubs = options[:hubs] || []
 
       @entries = []
     end
@@ -35,7 +34,10 @@ module TinyAtom
         xm.link(:href => feed_url, :rel => 'self')
         xm.updated(updated.xmlschema)
         xm.id(site_url)
-        hubs.each { |hub| xm.link(:href => hub, :rel => 'hub') }
+        TinyAtom::author(xm, feed_options)
+        feed_options.fetch(:hubs, []).each do |hub|
+          xm.link(:rel => 'hub', :href => hub)
+        end
 
         entries.each do |e|
           xm.entry {
@@ -44,6 +46,7 @@ module TinyAtom
             xm.id(entry_id(e))
             xm.updated(e[:updated])
             xm.summary(e[:summary]) if e[:summary]
+            xm.content(e[:content]) if e[:content]
 
             TinyAtom::author(xm, e)
             TinyAtom::enclosure(xm, e)
@@ -65,8 +68,8 @@ module TinyAtom
     attr_reader :site_url
     attr_reader :title
     attr_reader :feed_url
+    attr_reader :feed_options
     attr_reader :site_domain
-    attr_reader :hubs
     attr_reader :entries
   end
 
@@ -77,26 +80,30 @@ module TinyAtom
     if h[:author_name]
       markup.author {
         markup.name(h[:author_name]) if h[:author_name]
-        markup.name(h[:author_email]) if h[:author_email]
-        markup.name(h[:author_uri]) if h[:author_uri]
+        markup.email(h[:author_email]) if h[:author_email]
+        markup.uri(h[:author_uri]) if h[:author_uri]
       }
     end
   end
 
   # Add enclosure tags if present
   def enclosure(markup, h)
-    if h[:enclosure_type] and h[:link] and h[:enclosure_title]
-      xm.link(:rel => 'enclosure', :type => h[:enclosure_type],
-        :href => h[:link], :title => h[:enclosure_title])
+    if h[:enclosure_type] and h[:enclosure_href] and h[:enclosure_title]
+      link(markup, 'enclosure', h[:enclosure_type], h[:enclosure_href],
+        h[:enclosure_title])
     end
   end
 
   # Add via tags if present
   def via(markup, h)
-    if h[:via_type] and h[:via_url] and h[:via_title]
-      markup.link(:rel => 'via', :type => h[:via_type],
-        :href => h[:via_url], :title => h[:via_title])
+    if h[:via_type] and h[:via_href] and h[:via_title]
+      link(markup, 'via', h[:via_type], h[:via_href], h[:via_title])
     end
+  end
+
+  # Create link tag
+  def link(markup, rel, type, href, title)
+    markup.link(:rel => rel, :type => type, :href => href, :title => title)
   end
 
 end
