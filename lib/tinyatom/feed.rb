@@ -74,7 +74,7 @@ module TinyAtom
 
   # Add author tags if present
   def author(markup, h)
-    if h[:author_name] or h[:author_email] or h[:author_uri]
+    if h[:author_name]
       markup.author {
         markup.name(h[:author_name]) if h[:author_name]
         markup.name(h[:author_email]) if h[:author_email]
