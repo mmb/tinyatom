@@ -1,26 +1,78 @@
 Aims to be the smallest, easiest to use ruby Atom feed generator.
 
-Example usage:
+Currently supports only a subset of the most frequently used Atom fields. This
+example shows everything it can do.
 
 <pre>
 <code>
-feed = TinyAtom::Feed.new('http://mysite.com/', 'My Site',
-  'http://mysite.com/atom.xml')
-feed.add_entry(1, 'entry 1', Time.now, 'http://mysite.com/1')
+require 'tinyatom'
+
+feed = TinyAtom::Feed.new(
+  'http://mysite.com/blog/',
+  'My Blog',
+  'http://mysite.com/blog/atom.xml',
+
+  # optional
+
+  :author_name => 'me',
+  :author_email => 'me@mysite.com',
+  :author_uri => 'http://mysite.com/',
+
+  :hubs => ['http://pubsubhubbub.appspot.com/']
+  )
+
+feed.add_entry(
+  1,
+  'post 1',
+  Time.now,
+  'http://mysite.com/blog/1',
+
+  # optional
+
+  :author_name => 'me',
+  :author_email => 'me@mysite.com',
+  :author_uri => 'http://mysite.com/',
+
+  :enclosure_type => 'image/png',
+  :enclosure_href => 'http://mysite.com/image.png',
+  :enclosure_title => 'photo',
+
+  :via_type => 'text/html',
+  :via_href => 'http://anotherblog.com/posts/999',
+  :via_title => 'Look at this photo'
+  )
+
 puts feed.make(:indent => 2)
+# open('atom.xml', 'w') { |f| feed.make(:target => f) }
 
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>My Site</title>
-  <link href="http://mysite.com/atom.xml" rel="self"/>
-  <updated>2010-05-18T00:19:13-04:00</updated>
-  <id>http://mysite.com/</id>
+  <title>My Blog</title>
+  <link href="http://mysite.com/blog/atom.xml" rel="self"/>
+  <updated>2010-05-20T20:46:27-04:00</updated>
+  <id>http://mysite.com/blog/</id>
+  <author>
+    <name>me</name>
+    <email>me@mysite.com</email>
+    <uri>http://mysite.com/</uri>
+  </author>
+  <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
   <entry>
-    <title>entry 1</title>
-    <link href="http://mysite.com/1"/>
-    <id>tag:mysite.com,2010-05-18:1</id>
-    <updated>Tue May 18 00:19:13 -0400 2010</updated>
+    <title>post 1</title>
+    <link href="http://mysite.com/blog/1"/>
+    <id>tag:mysite.com,2010-05-20:1</id>
+    <updated>2010-05-20T20:46:27-04:00</updated>
+    <author>
+      <name>me</name>
+      <email>me@mysite.com</email>
+      <uri>http://mysite.com/</uri>
+    </author>
+    <link type="image/png" title="photo" rel="enclosure" href="http://mysite.com/image.png"/>
+    <link type="text/html" title="Look at this photo" rel="via" href="http://anotherblog.com/posts/999"/>
   </entry>
 </feed>
+
 </code>
 </pre>
+
+Questions and comments: "matthewm@boedicker.org":mailto:matthewm@boedicker.org
