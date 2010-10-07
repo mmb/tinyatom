@@ -94,7 +94,6 @@ module TinyAtom
   # Add enclosure tags if present
   def enclosure(markup, h)
     if h[:enclosure_type] and h[:enclosure_href] and h[:enclosure_title]
-
       options = {}
       h.each do |k,v|
         if EnclosureOptionalAttrs.include?(k)
