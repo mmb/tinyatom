@@ -86,11 +86,24 @@ module TinyAtom
     end
   end
 
+  # param name => tag name
+  EnclosureOptionalAttrs = {
+    :enclosure_length => :length,
+    }
+
   # Add enclosure tags if present
   def enclosure(markup, h)
     if h[:enclosure_type] and h[:enclosure_href] and h[:enclosure_title]
+
+      options = {}
+      h.each do |k,v|
+        if EnclosureOptionalAttrs.include?(k)
+          options[EnclosureOptionalAttrs[k]] = v
+        end
+      end
+
       link(markup, 'enclosure', h[:enclosure_type], h[:enclosure_href],
-        h[:enclosure_title])
+        h[:enclosure_title], options)
     end
   end
 
@@ -102,8 +115,13 @@ module TinyAtom
   end
 
   # Create link tag
-  def link(markup, rel, type, href, title)
-    markup.link(:rel => rel, :type => type, :href => href, :title => title)
+  def link(markup, rel, type, href, title, options={})
+    markup.link({
+      :rel => rel,
+      :type => type,
+      :href => href,
+      :title => title
+      }.merge(options))
   end
 
 end
