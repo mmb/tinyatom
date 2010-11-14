@@ -42,7 +42,6 @@ feed.add_entry(
   :via_href => 'http://anotherblog.com/posts/999',
   :via_title => 'Look at this photo',
 
-
   :media_thumbnail_url => 'http://mysite.com/thumbnails/1.jpg',
   :media_thumbnail_width => 100,
   :media_thumbnail_height => 100,
