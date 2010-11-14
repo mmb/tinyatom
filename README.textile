@@ -55,10 +55,10 @@ puts feed.make(:indent => 2)
 # open('atom.xml', 'w') { |f| feed.make(:target => f) }
 
 <?xml version="1.0" encoding="UTF-8"?>
-<feed xmlns:media="http://purl.org/syndication/atommedia" xmlns="http://www.w3.org/2005/Atom">
+<feed xmlns:media="http://search.yahoo.com/mrss/" xmlns="http://www.w3.org/2005/Atom">
   <title>My Blog</title>
   <link rel="self" href="http://mysite.com/blog/atom.xml"/>
-  <updated>2010-11-14T10:35:27-05:00</updated>
+  <updated>2010-11-14T11:36:03-05:00</updated>
   <id>http://mysite.com/blog/</id>
   <author>
     <name>me</name>
@@ -70,7 +70,7 @@ puts feed.make(:indent => 2)
     <title>post 1</title>
     <link href="http://mysite.com/blog/1"/>
     <id>tag:mysite.com,2010-11-14:1</id>
-    <updated>2010-11-14T10:35:27-05:00</updated>
+    <updated>2010-11-14T11:36:03-05:00</updated>
     <summary>the summary</summary>
     <content>the content</content>
     <author>
