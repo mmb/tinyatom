@@ -1,5 +1,6 @@
 require 'uri'
 require 'builder'
+require 'time'
 
 module TinyAtom
 
