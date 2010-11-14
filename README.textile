@@ -40,17 +40,23 @@ feed.add_entry(
 
   :via_type => 'text/html',
   :via_href => 'http://anotherblog.com/posts/999',
-  :via_title => 'Look at this photo'
+  :via_title => 'Look at this photo',
+
+
+  :media_thumbnail_url => 'http://mysite.com/thumbnails/1.jpg',
+  :media_thumbnail_width => 100,
+  :media_thumbnail_height => 100,
+  :media_thumbnail_time => '00:00:00.000'
   )
 
 puts feed.make(:indent => 2)
 # open('atom.xml', 'w') { |f| feed.make(:target => f) }
 
 <?xml version="1.0" encoding="UTF-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
+<feed xmlns:media="http://purl.org/syndication/atommedia" xmlns="http://www.w3.org/2005/Atom">
   <title>My Blog</title>
   <link rel="self" href="http://mysite.com/blog/atom.xml"/>
-  <updated>2010-10-06T20:34:49-04:00</updated>
+  <updated>2010-11-14T10:15:25-05:00</updated>
   <id>http://mysite.com/blog/</id>
   <author>
     <name>me</name>
@@ -61,14 +67,15 @@ puts feed.make(:indent => 2)
   <entry>
     <title>post 1</title>
     <link href="http://mysite.com/blog/1"/>
-    <id>tag:mysite.com,2010-10-06:1</id>
-    <updated>2010-10-06T20:34:49-04:00</updated>
+    <id>tag:mysite.com,2010-11-14:1</id>
+    <updated>2010-11-14T10:15:25-05:00</updated>
     <author>
       <name>me</name>
       <email>me@mysite.com</email>
       <uri>http://mysite.com/</uri>
     </author>
-    <link type="image/png" rel="enclosure" length="6227" title="photo" href="http://mysite.com/image.png"/>
+    <link type="image/png" rel="enclosure" title="photo" length="6227" href="http://mysite.com/image.png"/>
+    <media:thumbnail url="http://mysite.com/thumbnails/1.jpg" height="100" time="00:00:00.000" width="100"/>
     <link type="text/html" rel="via" title="Look at this photo" href="http://anotherblog.com/posts/999"/>
   </entry>
 </feed>

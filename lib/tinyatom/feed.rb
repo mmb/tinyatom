@@ -29,7 +29,8 @@ module TinyAtom
       xm = Builder::XmlMarkup.new(options)
       xm.instruct!(:xml)
 
-      xm.feed(:xmlns => 'http://www.w3.org/2005/Atom') {
+      xm.feed(:xmlns => 'http://www.w3.org/2005/Atom',
+        :'xmlns:media' => 'http://purl.org/syndication/atommedia') {
         xm.title(title)
         xm.link(:href => feed_url, :rel => 'self')
         xm.updated(updated.xmlschema)
@@ -48,8 +49,11 @@ module TinyAtom
             xm.summary(e[:summary]) if e[:summary]
             xm.content(e[:content]) if e[:content]
 
-            TinyAtom::author(xm, e)
-            TinyAtom::enclosure(xm, e)
+            (e[:authors] || [e]).each { |h| TinyAtom::author(xm, h) }
+            (e[:enclosures] || [e]).each { |h| TinyAtom::enclosure(xm, h) }
+            (e[:media_thumbnails] || [e]).each do |h|
+              TinyAtom::media_thumbnail(xm, h)
+            end
             TinyAtom::via(xm, e)
           }
         end
@@ -103,6 +107,28 @@ module TinyAtom
 
       link(markup, 'enclosure', h[:enclosure_type], h[:enclosure_href],
         h[:enclosure_title], options)
+    end
+  end
+
+  # param name => tag name
+  MediaThumbnailOptionalAttrs = {
+    :media_thumbnail_height => :height,
+    :media_thumbnail_width => :width,
+    :media_thumbnail_time => :time,
+    }
+
+  # Add media:thumbnail tags if present.
+  def media_thumbnail(markup, h)
+    if h[:media_thumbnail_url]
+      options = {}
+      h.each do |k,v|
+        if MediaThumbnailOptionalAttrs.include?(k)
+          options[MediaThumbnailOptionalAttrs[k]] = v
+        end
+      end
+
+      markup.media(:thumbnail,
+        { :url => h[:media_thumbnail_url] }.merge(options))
     end
   end
 
