@@ -30,7 +30,7 @@ module TinyAtom
       xm.instruct!(:xml)
 
       xm.feed(:xmlns => 'http://www.w3.org/2005/Atom',
-        :'xmlns:media' => 'http://purl.org/syndication/atommedia') {
+        :'xmlns:media' => 'http://search.yahoo.com/mrss/') {
         xm.title(title)
         xm.link(:href => feed_url, :rel => 'self')
         xm.updated(updated.xmlschema)
