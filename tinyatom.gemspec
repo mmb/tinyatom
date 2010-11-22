@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matthew M. Boedicker"]
-  s.date = %q{2010-11-21}
+  s.date = %q{2010-11-22}
   s.description = %q{Small and easy to use ruby Atom feed generator.}
   s.email = %q{matthewm@boedicker.org}
   s.extra_rdoc_files = [
@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
     "tinyatom.gemspec"
   ]
   s.homepage = %q{http://github.com/mmb/tinyatom}
+  s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Small and easy to use ruby Atom feed generator.}

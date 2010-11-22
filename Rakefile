@@ -7,6 +7,8 @@ begin
     gemspec.email = 'matthewm@boedicker.org'
     gemspec.homepage = 'http://github.com/mmb/tinyatom'
     gemspec.authors = ['Matthew M. Boedicker']
+    gemspec.license = 'MIT'
+
     %w{
       builder 2.1.2
      }.each_slice(2) { |g,v| gemspec.add_dependency(g, ">= #{v}") }
