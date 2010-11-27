@@ -1,2 +1,2 @@
 require 'tinyatom/feed'
-require 'tinyatom/uri'
+require 'tinyatom/uri_domain'

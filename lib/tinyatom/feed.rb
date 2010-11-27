@@ -10,7 +10,7 @@ module TinyAtom
       @site_url, @title, @feed_url, @feed_options = site_url, title, feed_url,
         options
 
-      @site_domain = URI(@site_url).domain
+      @site_domain = URI(@site_url).extend(TinyAtom::URIDomain).domain
 
       @entries = []
     end

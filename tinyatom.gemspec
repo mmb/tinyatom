@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matthew M. Boedicker"]
-  s.date = %q{2010-11-22}
+  s.date = %q{2010-11-27}
   s.description = %q{Small and easy to use ruby Atom feed generator.}
   s.email = %q{matthewm@boedicker.org}
   s.extra_rdoc_files = [
@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
     "VERSION",
     "lib/tinyatom.rb",
     "lib/tinyatom/feed.rb",
-    "lib/tinyatom/uri.rb",
+    "lib/tinyatom/uri_domain.rb",
     "tinyatom.gemspec"
   ]
   s.homepage = %q{http://github.com/mmb/tinyatom}
@@ -36,12 +36,15 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<builder>, [">= 2.1.2"])
+      s.add_runtime_dependency(%q<builder>, ["~> 2.0"])
+      s.add_runtime_dependency(%q<public_suffix_service>, ["~> 0.0"])
     else
-      s.add_dependency(%q<builder>, [">= 2.1.2"])
+      s.add_dependency(%q<builder>, ["~> 2.0"])
+      s.add_dependency(%q<public_suffix_service>, ["~> 0.0"])
     end
   else
-    s.add_dependency(%q<builder>, [">= 2.1.2"])
+    s.add_dependency(%q<builder>, ["~> 2.0"])
+    s.add_dependency(%q<public_suffix_service>, ["~> 0.0"])
   end
 end
 

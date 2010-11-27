@@ -10,9 +10,9 @@ begin
     gemspec.license = 'MIT'
 
     %w{
-      builder 2.1.2
-     }.each_slice(2) { |g,v| gemspec.add_dependency(g, ">= #{v}") }
-    Jeweler::GemcutterTasks.new
+      builder ~> 2.0
+      public_suffix_service ~> 0.0
+     }.each_slice(3) { |g,o,v| gemspec.add_dependency(g, "#{o} #{v}") }
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: gem install jeweler"
