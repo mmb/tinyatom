@@ -1,7 +1,5 @@
 require 'public_suffix_service'
 
-require 'tinyatom'
-
 # URI mixin that adds method to get domain.
 module TinyAtom
 
