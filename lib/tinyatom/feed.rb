@@ -34,7 +34,9 @@ module TinyAtom
         :'xmlns:media' => 'http://search.yahoo.com/mrss/') {
         xm.title title
         xm.link :href => feed_url, :rel => 'self'
-        xm.updated updated.xmlschema
+        if u = updated
+          xm.updated u.xmlschema
+        end
         xm.id site_url
         TinyAtom::author xm, feed_options
         feed_options.fetch(:hubs, []).each do |hub|
