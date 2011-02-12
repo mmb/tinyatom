@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{tinyatom}
-  s.version = "0.3.3"
+  s.version = "0.3.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matthew M. Boedicker"]
-  s.date = %q{2010-11-27}
+  s.date = %q{2011-02-11}
   s.description = %q{Small and easy to use ruby Atom feed generator.}
   s.email = %q{matthewm@boedicker.org}
   s.extra_rdoc_files = [
