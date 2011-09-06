@@ -3,8 +3,7 @@ Aims to be the smallest, easiest to use ruby Atom feed generator.
 Currently supports only a subset of the most frequently used Atom fields. This
 example shows everything it can do.
 
-<pre>
-<code>
+```ruby
 require 'tinyatom'
 
 feed = TinyAtom::Feed.new(
@@ -83,8 +82,6 @@ puts feed.make(:indent => 2)
     <link type="text/html" rel="via" title="Look at this photo" href="http://anotherblog.com/posts/999"/>
   </entry>
 </feed>
-
-</code>
-</pre>
+```
 
 Questions and comments: "matthewm@boedicker.org":mailto:matthewm@boedicker.org
