@@ -52,7 +52,11 @@ feed.add_entry(
 
 puts feed.make(:indent => 2)
 # open('atom.xml', 'w') { |f| feed.make(:target => f) }
+```
 
+Output:
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns:media="http://search.yahoo.com/mrss/" xmlns="http://www.w3.org/2005/Atom">
   <title>My Blog</title>
@@ -84,4 +88,4 @@ puts feed.make(:indent => 2)
 </feed>
 ```
 
-Questions and comments: "matthewm@boedicker.org":mailto:matthewm@boedicker.org
+Questions and comments: <matthewm@boedicker.org>
