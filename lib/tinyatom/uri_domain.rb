@@ -1,4 +1,4 @@
-require 'public_suffix_service'
+require 'public_suffix'
 
 # URI mixin that adds method to get domain.
 module TinyAtom
@@ -9,7 +9,7 @@ module TinyAtom
     def domain
       if host
         begin
-          parsed = PublicSuffixService.parse(host.downcase)
+          parsed = PublicSuffix.parse(host.downcase)
           "#{parsed.sld}.#{parsed.tld}"
         rescue Exception
         end
