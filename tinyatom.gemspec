@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   %w{
     builder > 0
-    public_suffix_service > 0
+    public_suffix > 0
     }.each_slice(3) { |g,o,v| s.add_dependency(g, "#{o} #{v}") }
 
   s.files = `git ls-files`.split("\n")
