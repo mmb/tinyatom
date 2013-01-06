@@ -1,8 +1,12 @@
 # -*- encoding: utf-8 -*-
 
+$:.unshift(File.join(File.dirname(__FILE__), 'lib'))
+
+require 'tinyatom/version'
+
 Gem::Specification.new do |s|
   s.name = 'tinyatom'
-  s.version = '0.3.5'
+  s.version = TinyAtom::VERSION
   s.summary = 'Small and easy to use ruby Atom feed generator'
   s.description = s.summary
   s.homepage = 'https://github.com/mmb/tinyatom'
